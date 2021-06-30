@@ -1,4 +1,5 @@
 import express from 'express';
+const cors = require('cors');
 import { applicants } from './database/applicants';
 import { vacancies } from './database/vacancies';
 
@@ -11,10 +12,10 @@ app.get("/",(req, res) =>{
 
 app.listen(PORT,() => console.log(`hosting @${PORT}`));
 
-app.get('/candidates', (req, res) => {
+app.get('/candidates', cors(), (req, res) => {
     res.send(applicants)
 });
 
-app.get('/vacancies', (req, res) => {
+app.get('/vacancies', cors(), (req, res) => {
     res.send(vacancies)
 });
