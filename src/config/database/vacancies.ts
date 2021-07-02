@@ -1,5 +1,5 @@
 interface IVacancies {
-    id: number, 
+    id: string, 
     title: string, 
     company: string, 
     location: string, 
@@ -9,7 +9,7 @@ interface IVacancies {
 };
 
 export const vacancies: IVacancies[] = [{
-    id: 1,
+    id: '1',
     title:'Software Developer',
     company: 'Green',
     location: 'Remote',
@@ -17,7 +17,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 51,
     endDate: '11/11/2021'
 }, {
-    id: 2,
+    id: '2',
     title:'Customer Service Advisor',
     company: 'Green',
     location: 'Newcastle',
@@ -25,7 +25,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 21,
     endDate: '11/11/2021'
 }, {
-    id: 3,
+    id: '3',
     title:'Chef',
     company: 'Bistros',
     location: 'London',
@@ -33,7 +33,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 3,
     endDate: '11/11/2021'
 }, {
-    id: 4,
+    id: '4',
     title:'Data Analyst',
     company: 'BT',
     location: 'York',
@@ -41,7 +41,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 24,
     endDate: '11/11/2021'
 }, {
-    id: 5,
+    id: '5',
     title:'Mechanic',
     company: 'Daves Wheels',
     location: 'Barnsley',
@@ -49,7 +49,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 18,
     endDate: '11/11/2021'
 }, {
-    id: 6,
+    id: '6',
     title:'Manager',
     company: 'Interview',
     location: 'Manchester',
@@ -57,7 +57,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 4,
     endDate: '11/11/2021'
 }, {
-    id: 7,
+    id: '7',
     title:'Software Developer',
     company: 'Green',
     location: 'Remote',
@@ -65,7 +65,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 15,
     endDate: '11/11/2021'
 }, {
-    id: 8,
+    id: '8',
     title:'Customer Service Advisor',
     company: 'Green',
     location: 'Newcastle',
@@ -73,7 +73,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 26,
     endDate: '11/11/2021'
 }, {
-    id: 9,
+    id: '9',
     title:'Chef',
     company: 'Bistros',
     location: 'Manchester',
@@ -81,7 +81,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 32,
     endDate: '11/11/2021'
 }, {
-    id: 10,
+    id: '10',
     title:'Data Analyst',
     company: 'BT',
     location: 'Barnsley',
@@ -89,7 +89,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 24,
     endDate: '11/11/2021'
 }, {
-    id: 11,
+    id: '11',
     title:'Mechanic',
     company: 'Daves Wheels',
     location: 'Newcastle',
@@ -97,7 +97,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 1,
     endDate: '11/11/2021'
 }, {
-    id: 12,
+    id: '12',
     title:'Manager',
     company: 'Interview',
     location: 'York',
@@ -105,7 +105,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 14,
     endDate: '11/11/2021'
 }, {
-    id: 13,
+    id: '13',
     title:'Software Developer',
     company: 'BT',
     location: 'Cornwall',
@@ -113,7 +113,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 51,
     endDate: '11/11/2021'
 }, {
-    id: 14,
+    id: '14',
     title:'Customer Service Advisor',
     company: 'Bupa',
     location: 'Immingham',
@@ -121,7 +121,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 44,
     endDate: '11/11/2021'
 }, {
-    id: 15,
+    id: '15',
     title:'Chef',
     company: 'Healing Manor',
     location: 'Healing',
@@ -129,7 +129,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 7,
     endDate: '11/11/2021'
 }, {
-    id: 16,
+    id: '16',
     title:'Data Analyst',
     company: 'BT',
     location: 'Hull',
@@ -137,7 +137,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 24,
     endDate: '11/11/2021'
 }, {
-    id: 17,
+    id: '17',
     title:'Mechanic',
     company: 'Daves Wheels',
     location: 'Barnsley',
@@ -145,7 +145,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 18,
     endDate: '11/11/2021'
 }, {
-    id: 18,
+    id: '18',
     title:'Manager',
     company: 'Interview',
     location: 'Manchester',
@@ -153,7 +153,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 4,
     endDate: '11/11/2021'
 }, {
-    id: 19,
+    id: '19',
     title:'Software Developer',
     company: 'Green',
     location: 'Remote',
@@ -161,7 +161,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 15,
     endDate: '11/11/2021'
 }, {
-    id: 20,
+    id: '20',
     title:'Customer Service Advisor',
     company: 'Green',
     location: 'Newcastle',
@@ -169,7 +169,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 26,
     endDate: '11/11/2021'
 }, {
-    id: 21,
+    id: '21',
     title:'Chef',
     company: 'Bistros',
     location: 'Manchester',
@@ -177,7 +177,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 32,
     endDate: '11/11/2021'
 }, {
-    id: 22,
+    id: '22',
     title:'Data Analyst',
     company: 'BT',
     location: 'Barnsley',
@@ -185,7 +185,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 24,
     endDate: '11/11/2021'
 }, {
-    id: 23,
+    id: '23',
     title:'Mechanic',
     company: 'Daves Wheels',
     location: 'Newcastle',
@@ -193,7 +193,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 1,
     endDate: '11/11/2021'
 }, {
-    id: 24,
+    id: '24',
     title:'Manager',
     company: 'Interview',
     location: 'York',
@@ -201,7 +201,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 14,
     endDate: '11/11/2021'
 }, {
-    id: 25,
+    id: '25',
     title:'Software Developer',
     company: 'Green',
     location: 'Remote',
@@ -209,7 +209,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 51,
     endDate: '11/11/2021'
 }, {
-    id: 26,
+    id: '26',
     title:'Customer Service Advisor',
     company: 'Green',
     location: 'Newcastle',
@@ -217,7 +217,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 21,
     endDate: '11/11/2021'
 }, {
-    id: 27,
+    id: '27',
     title:'Chef',
     company: 'Bistros',
     location: 'London',
@@ -225,7 +225,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 3,
     endDate: '11/11/2021'
 }, {
-    id: 28,
+    id: '28',
     title:'Data Analyst',
     company: 'BT',
     location: 'York',
@@ -233,7 +233,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 24,
     endDate: '11/11/2021'
 }, {
-    id: 29,
+    id: '29',
     title:'Mechanic',
     company: 'Daves Wheels',
     location: 'Barnsley',
@@ -241,7 +241,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 18,
     endDate: '11/11/2021'
 }, {
-    id: 30,
+    id: '30',
     title:'Manager',
     company: 'Interview',
     location: 'Manchester',
@@ -249,7 +249,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 4,
     endDate: '11/11/2021'
 }, {
-    id: 31,
+    id: '31',
     title:'Software Developer',
     company: 'Green',
     location: 'Remote',
@@ -257,7 +257,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 15,
     endDate: '11/11/2021'
 }, {
-    id: 32,
+    id: '32',
     title:'Customer Service Advisor',
     company: 'Green',
     location: 'Newcastle',
@@ -265,7 +265,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 26,
     endDate: '11/11/2021'
 }, {
-    id: 33,
+    id: '33',
     title:'Chef',
     company: 'Bistros',
     location: 'Manchester',
@@ -273,7 +273,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 32,
     endDate: '11/11/2021'
 }, {
-    id: 34,
+    id: '34',
     title:'Data Analyst',
     company: 'BT',
     location: 'Barnsley',
@@ -281,7 +281,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 24,
     endDate: '11/11/2021'
 }, {
-    id: 35,
+    id: '35',
     title:'Mechanic',
     company: 'Daves Wheels',
     location: 'Newcastle',
@@ -289,7 +289,7 @@ export const vacancies: IVacancies[] = [{
     applicants: 1,
     endDate: '11/11/2021'
 }, {
-    id: 36,
+    id: '36',
     title:'Manager',
     company: 'Interview',
     location: 'York',

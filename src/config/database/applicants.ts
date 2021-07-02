@@ -1,5 +1,5 @@
 interface IApplicantCard {
-    id: number,
+    id: string,
     name: string,
     currentJob: string,
     location: string,
@@ -10,7 +10,7 @@ interface IApplicantCard {
 
 export const applicants: IApplicantCard[] = [
 	{
-		id: 1,
+		id: '1',
 		name: "John Smith",
 		currentJob: "Software Developer",
 		location: "Remote",
@@ -19,7 +19,7 @@ export const applicants: IApplicantCard[] = [
 		cvLink: "www.somelocation.com",
 	},
 	{
-		id: 2,
+		id: '2',
 		name: "Jack Daniels",
 		currentJob: "Software Developer",
 		location: "London",
@@ -28,7 +28,7 @@ export const applicants: IApplicantCard[] = [
 		cvLink: "www.somelocation.com",
 	},
 	{
-		id: 3,
+		id: '3',
 		name: "Jim Beam",
 		currentJob: "Software Developer",
 		location: "Manchester",
@@ -37,7 +37,7 @@ export const applicants: IApplicantCard[] = [
 		cvLink: "www.somelocation.com",
 	},
 	{
-		id: 4,
+		id: '4',
 		name: "Sarah Jane",
 		currentJob: "Software Developer",
 		location: "Cardif",
@@ -46,7 +46,7 @@ export const applicants: IApplicantCard[] = [
 		cvLink: "www.somelocation.com",
 	},
 	{
-		id: 5,
+		id: '5',
 		name: "Keith Richards",
 		currentJob: "Software Developer",
 		location: "Glasgow",
@@ -55,7 +55,7 @@ export const applicants: IApplicantCard[] = [
 		cvLink: "www.somelocation.com",
 	},
 	{
-		id: 6,
+		id: '6',
 		name: "Richie Blackmore",
 		currentJob: "Software Developer",
 		location: "Leeds",
