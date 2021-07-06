@@ -1,4 +1,4 @@
-interface IApplicantCard {
+export interface IApplicantCard {
     id: string,
     name: string,
     currentJob: string,

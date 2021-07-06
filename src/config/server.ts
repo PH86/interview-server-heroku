@@ -1,5 +1,6 @@
 import express from 'express';
 const cors = require('cors');
+import { IApplicantCard } from './database/applicants'
 import { applicants } from './database/applicants';
 import { vacancies } from './database/vacancies';
 import { users } from './database/users';
@@ -33,28 +34,43 @@ app.get('/vacancies', (req, res) => {
 
 app.get('/vacancies/:id', (req, res) => {
     let id = req.params.id
-    const singleVacancy = vacancies.find(vacancy => vacancy.id === id)
+    let singleVacancy = vacancies.find(vacancy => vacancy.id === id)
     res.send(singleVacancy);
 });
 
 app.get('/vacancies/:id/candidates', (req, res) => {
-    res.send(req.params);
+    let id = req.params.id
+    let singleVacancy = vacancies.find(vacancy => vacancy.id === id)
+    let returnedCandidates: (IApplicantCard | undefined)[] = []
+    singleVacancy?.applicants.forEach((applicant) => {
+        let returnedCandidate = applicants.find(candidate => candidate.id === applicant)
+        returnedCandidates.push(returnedCandidate)
+    });
+    res.send(returnedCandidates);
 });
 
 app.post('/vacancies', (req, res) => {
-    const newVacancy = req.body
-    console.log(newVacancy);
+    let newVacancy = req.body
+    const idString = vacancies.length + 1
+    const newID = {id: idString.toString()}
+    newVacancy = {...newID, ...newVacancy};
+    vacancies.push(newVacancy);
     res.status(201).send('Test successful')
 });
 
 app.put('/vacancies/:id', (req, res) => {
+    let id = req.params.id
     const updatedVacancy = req.body
-    console.log(updatedVacancy);
+    let vacancyIndex = vacancies.findIndex(vacancy => vacancy.id === id)
+    vacancies[vacancyIndex] = updatedVacancy;
     res.status(201).send('Test successful')
 });
 
 app.delete('/vacancies/:id', (req, res) => {
-
+    let id = req.params.id
+    let vacancyIndex = vacancies.findIndex(vacancy => vacancy.id === id)
+    vacancies.splice(vacancyIndex, 1);
+    console.log(vacancies);
 });
 
 app.get('/users', (req, res) => {
@@ -62,5 +78,7 @@ app.get('/users', (req, res) => {
 });
 
 app.get('/users/:userName', (req, res) => {
-    res.send(users)
+    let userName = req.params.userName
+    const currentUser = users.find(user => user.userName === userName);
+    res.send(currentUser)
 });
