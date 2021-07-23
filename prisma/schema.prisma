@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id      String   @id @default(cuid())
+  email   String   @unique
+  firstName    String
+  sirname String
+  company String?
+  subscription String
+  vacancies Vacancy[] 
+}
+
+model Vacancy {
+  id      String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  title   String   @db.VarChar(255)
+  company   String   @db.VarChar(255)
+  location  String   @db.VarChar(255)
+  salary  Int 
+  applicants String[]
+  endDate String 
+  jobDescription String
+  companyDescription String
+  salaryMin Int?
+  salaryMax Int?
+  requirementEssential String[]
+  requirementDesired String[]
+  responsibilities String[]
+  author  User  @relation(fields: [authorId], references: [id])
+  authorId  String
+}
+
+model Applicants {
+  id      String   @id @default(cuid())
+  name String
+  currentJob String
+  location String
+  email String
+  phoneNumber String
+  cvLink String
+}
