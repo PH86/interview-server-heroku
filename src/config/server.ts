@@ -4,9 +4,9 @@ import { IApplicantCard } from "./database/applicants";
 import { applicants } from "./database/applicants";
 import { vacancies } from "./database/vacancies";
 import { users } from "./database/users";
-import { getApplicants } from "./database";
-import { IUser } from "../intefaces";
-import { User } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 const app = express();
 const PORT: string | number = process.env.PORT || 5000;
@@ -21,9 +21,10 @@ app.get("/", (req, res) => {
 
 app.listen(PORT, () => console.log(`hosting @${PORT}`));
 
-app.get("/candidates", (req, res) => {
-  const applicantsResp: Promise<User[]> = getApplicants();
-  res.send(applicantsResp);
+app.get("/candidates", async (req, res) => {
+  const allApplicants = await prisma.user.findMany();
+  console.log(allApplicants);
+  res.send(allApplicants);
 });
 
 app.get("/candidates/:id", (req, res) => {
