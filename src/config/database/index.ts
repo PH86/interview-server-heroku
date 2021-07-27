@@ -22,8 +22,7 @@ async function main() {
 
 // get all applicants
 export const getApplicants = async () => {
-  const allUsers = await prisma.user.findMany();
-  return allUsers;
+  return await prisma.user.findMany();
 };
 // get single vacancy
 
