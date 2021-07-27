@@ -21,7 +21,7 @@ app.listen(PORT, () => console.log(`hosting @${PORT}`));
 
 app.get("/candidates", (req, res) => {
   const applicantsResp = getApplicants();
-  res.send(applicantsResp);
+  res.send(() => getApplicants());
 });
 
 app.get("/candidates/:id", (req, res) => {
