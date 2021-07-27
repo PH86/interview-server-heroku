@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => console.log(`hosting @${PORT}`));
 
 app.get("/candidates", async (req, res) => {
-  const allApplicants = await prisma.user.findMany();
+  const allApplicants = await prisma.applicants.findMany();
   console.log(allApplicants);
   if (allApplicants) {
     res.send(allApplicants);
