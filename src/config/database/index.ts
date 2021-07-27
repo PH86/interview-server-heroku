@@ -6,16 +6,22 @@ const prisma = new PrismaClient();
 async function main() {
   // ... you will write your Prisma Client queries here
 
-  await prisma.user.create({
+  await prisma.applicants.create({
     data: {
-      firstName: "John",
-      sirname: "Smith",
-      email: "john.smith@green.energy",
-      company: "green",
-      subscription: "full",
+      id: "6",
+      name: "Richie Blackmore",
+      currentJob: "Software Developer",
+      location: "Leeds",
+      email: "richie.blackmore@domain.com",
+      phoneNumber: "07745777454",
+      cvLink: "www.somelocation.com",
     },
   });
+  const applicant = await prisma.applicants.findMany();
+  console.log(applicant);
 }
+
+main();
 // Get user by ID?
 
 // get user vacancies
@@ -23,7 +29,7 @@ async function main() {
 
 // get all applicants
 export const getApplicants = async () => {
-  const allUsers = await prisma.user.findMany();
+  const allUsers = await prisma.applicants.findMany();
   console.log(allUsers);
   if (allUsers) {
     return allUsers;
