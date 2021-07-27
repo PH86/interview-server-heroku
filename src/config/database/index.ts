@@ -7,26 +7,15 @@ async function main() {
 
   await prisma.user.create({
     data: {
-      firstName: "Peter",
-      sirname: "Hodgson",
-      email: "peter.hodgson@green.energy",
+      firstName: "John",
+      sirname: "Smith",
+      email: "john.smith@green.energy",
       company: "green",
       subscription: "full",
     },
   });
-
-  const allUsers = await prisma.user.findMany();
-  console.dir(allUsers, { depth: null });
 }
-
-main()
-  .catch((e) => {
-    throw e;
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
-
+main();
 // Get user by ID?
 
 // get user vacancies
@@ -34,9 +23,9 @@ main()
 
 // get all applicants
 export const getApplicants = async () => {
-  await prisma.applicants.findMany();
+  const allUsers = await prisma.user.findMany();
+  return allUsers;
 };
-
 // get single vacancy
 
 // get single applicant
