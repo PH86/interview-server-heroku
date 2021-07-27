@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { IUser } from "../../intefaces";
 
 const prisma = new PrismaClient();
 
@@ -22,7 +23,7 @@ async function main() {
 
 // get all applicants
 export const getApplicants = async () => {
-  const allUsers = await prisma.user.findMany();
+  let allUsers = await prisma.user.findMany();
   return allUsers;
 };
 // get single vacancy
