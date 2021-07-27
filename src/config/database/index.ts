@@ -15,7 +15,6 @@ async function main() {
     },
   });
 }
-main();
 // Get user by ID?
 
 // get user vacancies
