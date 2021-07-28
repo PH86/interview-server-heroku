@@ -27,7 +27,7 @@ model Vacancy {
   company   String   @db.VarChar(255)
   location  String   @db.VarChar(255)
   salary  Int 
-  applicants String[]
+  applicants Applicants[]
   endDate String 
   jobDescription String
   companyDescription String
@@ -48,4 +48,6 @@ model Applicants {
   email String
   phoneNumber String
   cvLink String
+  vacancy Vacancy @relation(fields: [vacancyId], references: [id])
+  vacancyId String
 }

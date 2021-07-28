@@ -35,6 +35,7 @@ app.get("/candidates/:id", (req, res) => {
   res.send(selectedCandidate);
 });
 
+// Author Id will be passed by front end once ser auth is set up
 app.get("/vacancies", async (req, res) => {
   const allVacancies = await prisma.vacancy.findMany({
     where: { authorId: "ckrg9ir070000s3q5r1h2ddk7" },
