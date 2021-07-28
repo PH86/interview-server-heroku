@@ -35,8 +35,11 @@ app.get("/candidates/:id", (req, res) => {
   res.send(selectedCandidate);
 });
 
-app.get("/vacancies", (req, res) => {
-  res.send(vacancies);
+app.get("/vacancies", async (req, res) => {
+  const allVacancies = await prisma.vacancy.findMany({
+    where: { authorId: "ckrg9ir070000s3q5r1h2ddk7" },
+  });
+  res.send(allVacancies);
 });
 
 app.get("/vacancies/:id", (req, res) => {
