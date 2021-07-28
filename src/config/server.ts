@@ -42,9 +42,11 @@ app.get("/vacancies", async (req, res) => {
   res.send(allVacancies);
 });
 
-app.get("/vacancies/:id", (req, res) => {
+app.get("/vacancies/:id", async (req, res) => {
   let id = req.params.id;
-  let singleVacancy = vacancies.find((vacancy) => vacancy.id === id);
+  let singleVacancy = await prisma.vacancy.findUnique({
+    where: { id: id },
+  });
   res.send(singleVacancy);
 });
 
