@@ -51,15 +51,10 @@ app.get("/vacancies/:id", async (req, res) => {
   res.send(singleVacancy);
 });
 
-app.get("/vacancies/:id/candidates", (req, res) => {
+app.get("/vacancies/:id/candidates", async (req, res) => {
   let id = req.params.id;
-  let singleVacancy = vacancies.find((vacancy) => vacancy.id === id);
-  let returnedCandidates: (IApplicantCard | undefined)[] = [];
-  singleVacancy?.applicants.forEach((applicant) => {
-    let returnedCandidate = applicants.find(
-      (candidate) => candidate.id === applicant
-    );
-    returnedCandidates.push(returnedCandidate);
+  let returnedCandidates = await prisma.applicants.findMany({
+    where: { vacancyId: id },
   });
   res.send(returnedCandidates);
 });
