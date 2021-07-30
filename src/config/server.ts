@@ -61,25 +61,30 @@ app.get("/vacancies/:id/candidates", async (req, res) => {
 // pass the user ID to this function & use body object to populate
 app.post("/vacancies", async (req, res) => {
   let newVacancy: Vacancy = req.body;
-  await prisma.vacancy.create({
-    data: {
-      title: `${newVacancy.title}`,
-      company: `${newVacancy.company}`,
-      location: `${newVacancy.location}`,
-      salary: newVacancy.salary,
-      endDate: `${newVacancy.endDate}`,
-      jobDescription: `${newVacancy.jobDescription}`,
-      companyDescription: `${newVacancy.companyDescription}`,
-      salaryMin: newVacancy.salaryMin,
-      salaryMax: newVacancy.salaryMax,
-      requirementEssential: newVacancy.requirementEssential,
-      requirementDesired: newVacancy.requirementDesired,
-      responsibilities: newVacancy.responsibilities,
-      author: {
-        connect: { id: "ckrnho6n80000icq5qtsk8z" },
+  try {
+    await prisma.vacancy.create({
+      data: {
+        title: `${newVacancy.title}`,
+        company: `${newVacancy.company}`,
+        location: `${newVacancy.location}`,
+        salary: newVacancy.salary,
+        endDate: `${newVacancy.endDate}`,
+        jobDescription: `${newVacancy.jobDescription}`,
+        companyDescription: `${newVacancy.companyDescription}`,
+        salaryMin: newVacancy.salaryMin,
+        salaryMax: newVacancy.salaryMax,
+        requirementEssential: newVacancy.requirementEssential,
+        requirementDesired: newVacancy.requirementDesired,
+        responsibilities: newVacancy.responsibilities,
+        author: {
+          connect: { id: "ckrnfz2x50000acq5ptwvo403" },
+        },
       },
-    },
-  });
+    });
+  } catch (err) {
+    console.log(err);
+  }
+
   console.log(newVacancy);
   res.status(201).send("Test successful");
 });

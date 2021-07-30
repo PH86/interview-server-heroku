@@ -6,7 +6,7 @@ async function main() {
 
   await prisma.vacancy.create({
     data: {
-      title: "Customer Service Advisor",
+      title: "Test Customer Service Advisor",
       company: "Green",
       location: "Newcastle",
       salary: 25000,
