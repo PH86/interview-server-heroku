@@ -4,7 +4,7 @@ import { IApplicantCard } from "./database/applicants";
 import { applicants } from "./database/applicants";
 import { vacancies } from "./database/vacancies";
 import { users } from "./database/users";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Vacancy } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -58,13 +58,29 @@ app.get("/vacancies/:id/candidates", async (req, res) => {
   });
   res.send(returnedCandidates);
 });
-
-app.post("/vacancies", (req, res) => {
-  let newVacancy = req.body;
-  const idString = vacancies.length + 1;
-  const newID = { id: idString.toString() };
-  newVacancy = { ...newID, ...newVacancy };
-  vacancies.push(newVacancy);
+// pass the user ID to this function & use body object to populate
+app.post("/vacancies", async (req, res) => {
+  let newVacancy: Vacancy = req.body;
+  await prisma.vacancy.create({
+    data: {
+      title: `${newVacancy.title}`,
+      company: `${newVacancy.company}`,
+      location: `${newVacancy.location}`,
+      salary: newVacancy.salary,
+      endDate: `${newVacancy.endDate}`,
+      jobDescription: `${newVacancy.jobDescription}`,
+      companyDescription: `${newVacancy.companyDescription}`,
+      salaryMin: newVacancy.salaryMin,
+      salaryMax: newVacancy.salaryMax,
+      requirementEssential: newVacancy.requirementEssential,
+      requirementDesired: newVacancy.requirementDesired,
+      responsibilities: newVacancy.responsibilities,
+      author: {
+        connect: { id: "ckrnho6n80000icq5qtsk8z" },
+      },
+    },
+  });
+  console.log(newVacancy);
   res.status(201).send("Test successful");
 });
 

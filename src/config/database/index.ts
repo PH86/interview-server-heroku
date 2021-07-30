@@ -44,7 +44,6 @@ async function main() {
 }
 // Get user by ID?
 
-// get user vacancies
 // take a user id as property - get the vacancy ids for the users - get the vacancies for the user
 
 // get all applicants
@@ -55,9 +54,6 @@ export const getApplicants = async () => {
     return allUsers;
   }
 };
-// get single vacancy
-
-// get single applicant
 
 // add new vacancy
 
@@ -65,6 +61,15 @@ export const getApplicants = async () => {
 
 // delete vacancy
 
+// user authentication
+
+// server loading component
+
+// user settings
+
+// billing and payments
+
+// Admin - to do later
 // get all users
 
 // get single user
