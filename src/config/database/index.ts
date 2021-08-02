@@ -55,8 +55,6 @@ export const getApplicants = async () => {
   }
 };
 
-// add new vacancy
-
 // update current vacancy
 
 // delete vacancy

@@ -42,7 +42,7 @@ app.get("/vacancies", async (req, res) => {
   });
   res.send(allVacancies);
 });
-
+// Get single vacancy
 app.get("/vacancies/:id", async (req, res) => {
   let id = req.params.id;
   let singleVacancy = await prisma.vacancy.findUnique({
@@ -51,6 +51,7 @@ app.get("/vacancies/:id", async (req, res) => {
   res.send(singleVacancy);
 });
 
+// Get candidates for vacancy
 app.get("/vacancies/:id/candidates", async (req, res) => {
   let id = req.params.id;
   let returnedCandidates = await prisma.applicants.findMany({
@@ -58,6 +59,7 @@ app.get("/vacancies/:id/candidates", async (req, res) => {
   });
   res.send(returnedCandidates);
 });
+// Add new vacancy
 // pass the user ID to this function & use body object to populate
 app.post("/vacancies", async (req, res) => {
   let newVacancy: Vacancy = req.body;
@@ -84,16 +86,36 @@ app.post("/vacancies", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-
-  console.log(newVacancy);
-  res.status(201).send("Test successful");
 });
 
-app.put("/vacancies/:id", (req, res) => {
+app.put("/vacancies/:id", async (req, res) => {
   let id = req.params.id;
-  const updatedVacancy = req.body;
-  let vacancyIndex = vacancies.findIndex((vacancy) => vacancy.id === id);
-  vacancies[vacancyIndex] = updatedVacancy;
+  const updatedVacancy: Vacancy = req.body;
+  try {
+    await prisma.vacancy.update({
+      where: { id: `${id}` },
+      data: {
+        title: `${updatedVacancy.title}`,
+        company: `${updatedVacancy.company}`,
+        location: `${updatedVacancy.location}`,
+        salary: updatedVacancy.salary,
+        endDate: `${updatedVacancy.endDate}`,
+        jobDescription: `${updatedVacancy.jobDescription}`,
+        companyDescription: `${updatedVacancy.companyDescription}`,
+        salaryMin: updatedVacancy.salaryMin,
+        salaryMax: updatedVacancy.salaryMax,
+        requirementEssential: updatedVacancy.requirementEssential,
+        requirementDesired: updatedVacancy.requirementDesired,
+        responsibilities: updatedVacancy.responsibilities,
+        author: {
+          connect: { id: "ckrnfz2x50000acq5ptwvo403" },
+        },
+      },
+    });
+    console.log(updatedVacancy);
+  } catch (err) {
+    console.log(err);
+  }
   res.status(201).send("Test successful");
 });
 
