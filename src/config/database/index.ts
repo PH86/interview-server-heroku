@@ -55,7 +55,7 @@ export const getApplicants = async () => {
   }
 };
 
-// update current vacancy
+// DONE update current vacancy
 
 // delete vacancy
 
@@ -66,6 +66,8 @@ export const getApplicants = async () => {
 // user settings
 
 // billing and payments
+
+// Delete user and all data (deleteMany)
 
 // Admin - to do later
 // get all users

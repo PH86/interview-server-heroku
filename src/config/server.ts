@@ -88,6 +88,7 @@ app.post("/vacancies", async (req, res) => {
   }
 });
 
+// Update a vacancy
 app.put("/vacancies/:id", async (req, res) => {
   let id = req.params.id;
   const updatedVacancy: Vacancy = req.body;
@@ -119,11 +120,17 @@ app.put("/vacancies/:id", async (req, res) => {
   res.status(201).send("Test successful");
 });
 
-app.delete("/vacancies/:id", (req, res) => {
+// Delete a vacancy
+app.delete("/vacancies/:id", async (req, res) => {
   let id = req.params.id;
-  let vacancyIndex = vacancies.findIndex((vacancy) => vacancy.id === id);
-  vacancies.splice(vacancyIndex, 1);
-  console.log(vacancies);
+  try {
+    await prisma.vacancy.delete({
+      where: { id: `${id}` },
+    });
+    console.log("Vacancy Deleted");
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 app.get("/users", (req, res) => {
