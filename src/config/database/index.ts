@@ -59,6 +59,10 @@ export const getApplicants = async () => {
 
 // DONE delete vacancy
 
+// DONE user creation
+
+// DONE user password encryption
+
 // user authentication
 
 // server loading component

@@ -1,10 +1,11 @@
 import express from "express";
 const cors = require("cors");
+const bcrypt = require("bcrypt");
 import { IApplicantCard } from "./database/applicants";
 import { applicants } from "./database/applicants";
 import { vacancies } from "./database/vacancies";
 import { users } from "./database/users";
-import { PrismaClient, Vacancy } from "@prisma/client";
+import { PrismaClient, User, Vacancy } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -25,6 +26,39 @@ app.listen(PORT, () => console.log(`hosting @${PORT}`));
 app.get("/user", async (req, res) => {
   const allUsers = await prisma.user.findMany();
   res.send(allUsers);
+});
+
+// Create new user
+app.post("/user", async (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    await prisma.user.create({
+      data: {
+        email: `${req.body.email}`,
+        password: `${hashedPassword}`,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// Check user
+app.post("/user/login", async (req, res) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        email: req.body.email,
+      },
+    });
+    if (await bcrypt.compare(req.body.password, user?.password)) {
+      res.send("success");
+    } else {
+      res.send("incorrect");
+    }
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 app.get("/candidates", async (req, res) => {
