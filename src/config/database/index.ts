@@ -57,7 +57,7 @@ export const getApplicants = async () => {
 
 // DONE update current vacancy
 
-// delete vacancy
+// DONE delete vacancy
 
 // user authentication
 

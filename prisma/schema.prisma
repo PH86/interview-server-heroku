@@ -13,11 +13,19 @@ generator client {
 model User {
   id      String   @id @default(cuid())
   email   String   @unique
+  password String 
+  settings UserSettings[]
+}
+
+model UserSettings {
+  id      String   @id @default(cuid())
+  user  User  @relation(fields: [userId], references: [id])
+  userId  String
   firstName    String
   sirname String
   company String?
   subscription String
-  vacancies Vacancy[] 
+  vacancies Vacancy[]
 }
 
 model Vacancy {
@@ -36,7 +44,7 @@ model Vacancy {
   requirementEssential String[]
   requirementDesired String[]
   responsibilities String[]
-  author  User  @relation(fields: [authorId], references: [id])
+  author  UserSettings  @relation(fields: [authorId], references: [id])
   authorId  String
 }
 
