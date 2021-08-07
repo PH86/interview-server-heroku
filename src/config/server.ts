@@ -1,6 +1,9 @@
 import express from "express";
 const cors = require("cors");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
+import { Request, Response } from "express";
 import { IApplicantCard } from "./database/applicants";
 import { applicants } from "./database/applicants";
 import { vacancies } from "./database/vacancies";
@@ -15,7 +18,41 @@ const PORT: string | number = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cookieParser());
 
+interface IGetUserAuthInfoRequest extends Request {
+  user: object;
+}
+
+const authenticate = async (
+  req: IGetUserAuthInfoRequest,
+  res: any,
+  next: any
+) => {
+  const token = req.cookies["accessToken"];
+  const decoded = jwt.decode(token, process.env.ACCESS_TOKEN_SECRET);
+  if (decoded) {
+    try {
+      const user = await prisma.user.findUnique({
+        where: { email: decoded },
+      });
+      if (user) {
+        console.log("we are alive");
+        req.user = user;
+        next();
+      } else {
+        res.status(403).send("Token invalid");
+      }
+      console.log(decoded);
+    } catch (err) {
+      console.log(err);
+    }
+  } else {
+    res.status(403).send("Token not found");
+  }
+};
+
+// Test Server
 app.get("/", (req, res) => {
   res.send("<h1>Server Online</h1>");
 });
@@ -23,8 +60,9 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => console.log(`hosting @${PORT}`));
 
 // Test Get all users
-app.get("/user", async (req, res) => {
+app.get("/user", authenticate, async (req: any, res: any) => {
   const allUsers = await prisma.user.findMany();
+  console.log(req.user);
   res.send(allUsers);
 });
 
@@ -43,7 +81,7 @@ app.post("/user", async (req, res) => {
   }
 });
 
-// Check user
+// Authenticate & login user
 app.post("/user/login", async (req, res) => {
   try {
     const user = await prisma.user.findUnique({
@@ -52,7 +90,12 @@ app.post("/user/login", async (req, res) => {
       },
     });
     if (await bcrypt.compare(req.body.password, user?.password)) {
-      res.send("success");
+      const user = req.body.email;
+      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+      const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+      res.cookie("accessToken", accessToken, { maxAge: 9000, httpOnly: true });
+      res.cookie("refreshToken", refreshToken);
+      res.send("cookie Set");
     } else {
       res.send("incorrect");
     }
@@ -61,6 +104,7 @@ app.post("/user/login", async (req, res) => {
   }
 });
 
+// May not be used ************************
 app.get("/candidates", async (req, res) => {
   const allApplicants = await prisma.applicants.findMany();
   console.log(allApplicants);
@@ -69,6 +113,7 @@ app.get("/candidates", async (req, res) => {
   }
 });
 
+// May not be used ************************
 app.get("/candidates/:id", (req, res) => {
   let id = req.params.id;
   const selectedCandidate = applicants.find((candidate) => candidate.id === id);
