@@ -93,7 +93,10 @@ app.post("/user/login", async (req, res) => {
       const user = req.body.email;
       const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
       const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
-      res.cookie("accessToken", accessToken, { maxAge: 9000, httpOnly: true });
+      res.cookie("accessToken", accessToken, {
+        maxAge: 90000000,
+        httpOnly: true,
+      });
       res.cookie("refreshToken", refreshToken);
       res.send("cookie Set");
     } else {
@@ -123,7 +126,7 @@ app.get("/candidates/:id", (req, res) => {
 // Author Id will be passed by front end once ser auth is set up
 app.get("/vacancies", async (req, res) => {
   const allVacancies = await prisma.vacancy.findMany({
-    where: { authorId: "ckrnfz2x50000acq5ptwvo403" },
+    where: { authorId: "ckrz079yi0002qyq5hgt7zwyv" },
   });
   res.send(allVacancies);
 });
@@ -164,7 +167,7 @@ app.post("/vacancies", async (req, res) => {
         requirementDesired: newVacancy.requirementDesired,
         responsibilities: newVacancy.responsibilities,
         author: {
-          connect: { id: "ckrnfz2x50000acq5ptwvo403" },
+          connect: { id: "ckrz079yi0002qyq5hgt7zwyv" },
         },
       },
     });
@@ -194,7 +197,7 @@ app.put("/vacancies/:id", async (req, res) => {
         requirementDesired: updatedVacancy.requirementDesired,
         responsibilities: updatedVacancy.responsibilities,
         author: {
-          connect: { id: "ckrnfz2x50000acq5ptwvo403" },
+          connect: { id: "ckrz079yi0002qyq5hgt7zwyv" },
         },
       },
     });
