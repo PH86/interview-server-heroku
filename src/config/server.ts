@@ -52,12 +52,12 @@ const authenticate = async (
   }
 };
 
+app.listen(PORT, () => console.log(`hosting @${PORT}`));
+
 // Test Server
 app.get("/", (req, res) => {
   res.send("<h1>Server Online</h1>");
 });
-
-app.listen(PORT, () => console.log(`hosting @${PORT}`));
 
 // Test Get all users
 app.get("/user", authenticate, async (req: any, res: any) => {
