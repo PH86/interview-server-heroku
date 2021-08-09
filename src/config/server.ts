@@ -126,7 +126,7 @@ app.get("/candidates/:id", (req, res) => {
 // Author Id will be passed by front end once ser auth is set up
 app.get("/vacancies", async (req, res) => {
   const allVacancies = await prisma.vacancy.findMany({
-    where: { authorId: "ckrz079yi0002qyq5hgt7zwyv" },
+    where: { authorId: "cks4qgv5x00005uq514k4olae" },
   });
   res.send(allVacancies);
 });
@@ -167,7 +167,7 @@ app.post("/vacancies", async (req, res) => {
         requirementDesired: newVacancy.requirementDesired,
         responsibilities: newVacancy.responsibilities,
         author: {
-          connect: { id: "ckrz079yi0002qyq5hgt7zwyv" },
+          connect: { id: "cks4qgv5x00005uq514k4olae" },
         },
       },
     });
@@ -197,7 +197,7 @@ app.put("/vacancies/:id", async (req, res) => {
         requirementDesired: updatedVacancy.requirementDesired,
         responsibilities: updatedVacancy.responsibilities,
         author: {
-          connect: { id: "ckrz079yi0002qyq5hgt7zwyv" },
+          connect: { id: "cks4qgv5x00005uq514k4olae" },
         },
       },
     });
