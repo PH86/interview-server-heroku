@@ -76,6 +76,7 @@ app.post("/user", async (req, res) => {
         password: `${hashedPassword}`,
       },
     });
+    res.status(200).send("User Created");
   } catch (err) {
     res.status(403).send(err);
   }
