@@ -97,12 +97,10 @@ app.post("/user/login", async (req, res) => {
         maxAge: 90000000,
         httpOnly: true,
       });
-      res.sendStatus(200);
+      res.status(200).send("cookie Set");
       res.cookie("refreshToken", refreshToken);
-      res.send("cookie Set");
     } else {
-      res.send("incorrect");
-      res.sendStatus(403);
+      res.status(403).send("incorrect");
     }
   } catch (err) {
     console.log(err);
