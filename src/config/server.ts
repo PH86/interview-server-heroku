@@ -110,7 +110,7 @@ app.post("/user/login", async (req, res) => {
 });
 
 // May not be used ************************
-app.get("/candidates", async (req, res) => {
+app.get("/candidates", authenticate, async (req: any, res: any) => {
   const allApplicants = await prisma.applicants.findMany();
   console.log(allApplicants);
   if (allApplicants) {
@@ -126,14 +126,14 @@ app.get("/candidates/:id", (req, res) => {
 });
 
 // Author Id will be passed by front end once ser auth is set up
-app.get("/vacancies", async (req, res) => {
+app.get("/vacancies", authenticate, async (req: any, res: any) => {
   const allVacancies = await prisma.vacancy.findMany({
     where: { authorId: "cks4qgv5x00005uq514k4olae" },
   });
   res.send(allVacancies);
 });
 // Get single vacancy
-app.get("/vacancies/:id", async (req, res) => {
+app.get("/vacancies/:id", authenticate, async (req: any, res: any) => {
   let id = req.params.id;
   let singleVacancy = await prisma.vacancy.findUnique({
     where: { id: id },
@@ -142,16 +142,20 @@ app.get("/vacancies/:id", async (req, res) => {
 });
 
 // Get candidates for vacancy
-app.get("/vacancies/:id/candidates", async (req, res) => {
-  let id = req.params.id;
-  let returnedCandidates = await prisma.applicants.findMany({
-    where: { vacancyId: id },
-  });
-  res.send(returnedCandidates);
-});
+app.get(
+  "/vacancies/:id/candidates",
+  authenticate,
+  async (req: any, res: any) => {
+    let id = req.params.id;
+    let returnedCandidates = await prisma.applicants.findMany({
+      where: { vacancyId: id },
+    });
+    res.send(returnedCandidates);
+  }
+);
 // Add new vacancy
 // pass the user ID to this function & use body object to populate
-app.post("/vacancies", async (req, res) => {
+app.post("/vacancies", authenticate, async (req: any, res: any) => {
   let newVacancy: Vacancy = req.body;
   try {
     await prisma.vacancy.create({
@@ -179,7 +183,7 @@ app.post("/vacancies", async (req, res) => {
 });
 
 // Update a vacancy
-app.put("/vacancies/:id", async (req, res) => {
+app.put("/vacancies/:id", authenticate, async (req: any, res: any) => {
   let id = req.params.id;
   const updatedVacancy: Vacancy = req.body;
   try {
@@ -211,7 +215,7 @@ app.put("/vacancies/:id", async (req, res) => {
 });
 
 // Delete a vacancy
-app.delete("/vacancies/:id", async (req, res) => {
+app.delete("/vacancies/:id", authenticate, async (req: any, res: any) => {
   let id = req.params.id;
   try {
     await prisma.vacancy.delete({
@@ -221,14 +225,4 @@ app.delete("/vacancies/:id", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-});
-
-app.get("/users", (req, res) => {
-  res.send(users);
-});
-
-app.get("/users/:userName", (req, res) => {
-  let userName = req.params.userName;
-  const currentUser = users.find((user) => user.userName === userName);
-  res.send(currentUser);
 });
